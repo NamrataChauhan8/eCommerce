@@ -1,0 +1,52 @@
+.container-fluid {
+    margin-top: 20px;
+  
+    form {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+  
+      .input-group {
+        width: 300px;
+      }
+  
+      input[type="text"] {
+        width: 70%;
+      }
+  
+      button {
+        width: 30%;
+        margin-left: 3px;
+      }
+    }
+  
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+  
+    .card {
+      width: 5rem !important;
+      margin-bottom: 20px;
+      border: 2px solid black !important;
+  
+      .card-img-top {
+        height: 200px;
+        object-fit: cover;
+      }
+  
+      .card-body {
+        h5 {
+          font-size: 1.25rem;
+          margin-bottom: 0.5rem;
+        }
+  
+        .card-text {
+          font-size: 2px !important;
+          color: #6c757d;
+        }
+      }
+    }
+  }
+  

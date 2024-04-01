@@ -1,0 +1,45 @@
+body {
+  background-color: #f2f7f2;
+}
+
+.navbar {
+  padding: 1px 1px;
+  box-shadow: 0 2px 4px rgba(246, 223, 223, 0.1);
+  border: 1px solid black;
+  background-color: black !important;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  color: white;
+  text-decoration: none;
+  text-align: left;
+
+  &:hover {
+    color: white;
+  }
+}
+
+
+.btn {
+  font-size: 1rem;
+  padding: 8px 10px;
+  margin: auto;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+
+  &-outline-success {
+    border: 1px solid white;
+    color: white;
+
+    &:hover {
+      background-color: white;
+      color: black;
+    }
+  }
+
+  .active &-outline-success {
+    background-color: lightgray;
+    color: black;
+  }
+}
