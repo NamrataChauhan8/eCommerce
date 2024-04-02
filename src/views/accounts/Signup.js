@@ -29,7 +29,7 @@ const Signup = () => {
     }
     dispatch(signup(formData)).then(()=>{
       if (REGISTER_SUCCESS) {
-        navigate('/')
+        navigate('/login')
       }
     })
   };
