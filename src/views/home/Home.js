@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "../../assets/Navbar.scss";
 
-const Home = ({ addToCart, cartItems }) => {
+const Home = ({ addToCart }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -89,6 +89,7 @@ const Home = ({ addToCart, cartItems }) => {
   };
   const handleAddToCart = (product) => {
     addToCart(product);
+    alert("Item added to cart successfully")
   };
 
   return (
@@ -206,7 +207,7 @@ const Home = ({ addToCart, cartItems }) => {
         </div>
       )}
       {!noResults && isLoggedIn && (
-        <div className="pagination justify-content-center">
+        <div className="pagination justify-content-center m-5" >
           <button
             onClick={() => paginate(currentPage - 1)}
             disabled={currentPage === 1}
