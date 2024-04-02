@@ -1,12 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "../../assets/Account.scss";
 import { signup } from "../../redux/action/Actions";
 import { REGISTER_SUCCESS } from "../../redux/action/ActionTypes";
-import {EMAIL_REQUIRED, PASSWORD_LENGTH, PASSWORD_REQUIRED, SIGNUP_CHECK_PASSWORD, USERNAME_REQUIRED,PASSWORD_PATTERN} from "../../constants/Message"
+import { EMAIL_REQUIRED, PASSWORD_LENGTH, PASSWORD_REQUIRED, SIGNUP_CHECK_PASSWORD, USERNAME_REQUIRED, PASSWORD_PATTERN } from "../../constants/Message";
 
 const Signup = () => {
   const {
@@ -18,7 +17,6 @@ const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
   const onSubmit = async (formData) => {
     if (formData.password !== formData.confirmPassword) {
       setError("confirmPassword", {
@@ -27,12 +25,18 @@ const Signup = () => {
       });
       return;
     }
-    dispatch(signup(formData)).then(()=>{
+    dispatch(signup(formData)).then(() => {
       if (REGISTER_SUCCESS) {
-        navigate('/login')
+        navigate('/login');
       }
-    })
+    });
   };
+
+  const isLoggedIn = localStorage.getItem("userData") !== null;
+
+  if (isLoggedIn) {
+    return null; 
+  }
 
   return (
     <div className="form">
@@ -75,8 +79,7 @@ const Signup = () => {
               },
               pattern: {
                 value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/,
-                message:
-                  PASSWORD_PATTERN,
+                message: PASSWORD_PATTERN,
               },
             })}
           />
