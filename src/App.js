@@ -7,6 +7,7 @@ import Navbar from "./components/navbar/Navbar";
 import Home from "./views/home/Home";
 import MyOrders from "./views/orders/MyOrders";
 import Checkout from "./views/orders/Checkout";
+import Slider from "./views/slider/Slider";
 
 function App() {
   useEffect(() => {
@@ -41,6 +42,7 @@ function App() {
             element={
               <>
                 <Navbar />
+                <Slider />
                 <Home addToCart={addToCart} cartItems={cartItems} />
               </>
             }

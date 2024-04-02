@@ -170,7 +170,7 @@ const Home = ({ addToCart }) => {
         </div>
       )}
       {isLoggedIn && (
-        <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 justify-content-center">
+        <div className="row row-cols-1 row-cols-md-3 row-cols-lg-5 justify-content-center">
           {currentProducts.map((product) => (
             <div className="col mb-4" key={product.id}>
               <div className="card h-100">
