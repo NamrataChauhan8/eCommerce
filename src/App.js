@@ -10,6 +10,8 @@ import Checkout from "./views/orders/Checkout";
 import Slider from "./views/slider/Slider";
 
 function App() {
+  const [cartItems, setCartItems] = useState([]);
+  
   useEffect(() => {
     const storedCartItems = JSON.parse(localStorage.getItem("cartItems"));
     if (storedCartItems) {
@@ -17,7 +19,6 @@ function App() {
     }
   }, []);
 
-  const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product) => {
     setCartItems([...cartItems, product]);
