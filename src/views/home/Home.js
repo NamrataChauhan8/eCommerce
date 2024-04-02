@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "../../assets/Navbar.scss";
 
-const Home = () => {
+const Home = ({ addToCart, cartItems }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -48,7 +48,7 @@ const Home = () => {
   useEffect(() => {
     if (searchQuery === "") {
       setFilteredProducts(products);
-      setNoResults(false); 
+      setNoResults(false);
     }
   }, [searchQuery, products]);
 
@@ -68,7 +68,6 @@ const Home = () => {
     );
     setFilteredProducts(filtered);
     setCurrentPage(1);
-
     setNoResults(filtered.length === 0);
   };
 
@@ -87,6 +86,9 @@ const Home = () => {
 
   const handleSort = (order) => {
     setSortOrder(order);
+  };
+  const handleAddToCart = (product) => {
+    addToCart(product);
   };
 
   return (
@@ -113,7 +115,9 @@ const Home = () => {
           )}
         </div>
       </form>
-      {noResults && <p style={{margin:"3px", color:"red"}}>No products available</p>} 
+      {noResults && (
+        <p style={{ margin: "3px", color: "red" }}>No products available</p>
+      )}
       {isLoggedIn && (
         <div className="mt-3">
           <button
@@ -188,7 +192,11 @@ const Home = () => {
                     <b>Rating:</b> {product.rating.rate} ({product.rating.count}{" "}
                     reviews)
                   </p>
-                  <button className="btn btn-primary m-3" type="button">
+                  <button
+                    className="btn btn-primary m-3"
+                    type="button"
+                    onClick={() => handleAddToCart(product)}
+                  >
                     Add to Cart
                   </button>
                 </div>
