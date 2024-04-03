@@ -86,7 +86,6 @@ const Home = ({ addToCart,isLoggedIn,isSignedup }) => {
   };
   const handleAddToCart = (product) => {
     addToCart(product);
-    alert("Item added to cart successfully");
   };
 
   return (
