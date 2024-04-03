@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/action/Actions";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "../../assets/Account.scss";
-import { EMAIL_REQUIRED, PASSWORD_REQUIRED } from "../../constants/Message";
+import { EMAIL_REQUIRED, INCORRECT_CREDENTIALS, PASSWORD_REQUIRED } from "../../constants/Message";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -30,6 +31,7 @@ const Login = () => {
       navigate("/home");
     } else {
       console.log("Login failed");
+      setError(INCORRECT_CREDENTIALS);
     }
   };
 
@@ -64,6 +66,7 @@ const Login = () => {
             <span className="error">{PASSWORD_REQUIRED}</span>
           )}
         </div>
+        {error && <p className="error">{error}</p>}
         <button type="submit" className="btn">
           Login
         </button>

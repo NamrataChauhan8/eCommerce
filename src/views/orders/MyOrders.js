@@ -57,6 +57,21 @@ const MyOrders = ({ cartItems, removeFromCart,isLoggedIn,isSignedup }) => {
                         <b>Rating:</b> {item.rating.rate} ({item.rating.count}{" "}
                         reviews)
                       </p>
+                      <p>
+                         <label>
+                    <b>Quantity:</b>
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                    >
+                      <option value="1" selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </label>
+                      </p>
                       <button
                         className="btn btn-danger"
                         onClick={() => removeFromCart(item.id)}
@@ -68,7 +83,7 @@ const MyOrders = ({ cartItems, removeFromCart,isLoggedIn,isSignedup }) => {
                           className="btn btn-info mt-3"
                           onClick={handleCheckOut}
                         >
-                          Buy now
+                          Buy now  
                         </button>
                       </p>
                     </div>

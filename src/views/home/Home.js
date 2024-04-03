@@ -212,20 +212,7 @@ const Home = ({ addToCart,isLoggedIn,isSignedup }) => {
           >
             Previous
           </button>
-          {Array.from(
-            { length: Math.ceil(filteredProducts.length / productsPerPage) },
-            (_, index) => (
-              <button
-                key={index}
-                onClick={() => paginate(index + 1)}
-                className={`btn btn-outline-primary ${
-                  currentPage === index + 1 ? "active" : ""
-                }`}
-              >
-                {index + 1}
-              </button>
-            )
-          )}
+          
           <button
             onClick={() => paginate(currentPage + 1)}
             disabled={
