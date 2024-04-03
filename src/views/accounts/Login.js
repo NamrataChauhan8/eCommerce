@@ -4,7 +4,6 @@ import { login } from "../../redux/action/Actions";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "../../assets/Account.scss";
-import { LOGIN_SUCCESS } from "../../redux/action/ActionTypes";
 import { EMAIL_REQUIRED, PASSWORD_REQUIRED } from "../../constants/Message";
 
 const Login = () => {
@@ -25,18 +24,14 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     const { email, password } = data;
-    console.log("Submitting login form with email:", email);
-    dispatch(login(email, password)).then(() => {
-      if (LOGIN_SUCCESS) {
-        console.log("Login successfull")
-        navigate("/home");
-      }else{
-        return
-      }
-    });
+    const loginSuccess = await dispatch(login(email, password));
+    if (loginSuccess) {
+      console.log("Login successful");
+      navigate("/home");
+    } else {
+      console.log("Login failed");
+    }
   };
-
-  
 
   return (
     <div className="form">
