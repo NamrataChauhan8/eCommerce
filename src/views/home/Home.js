@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 import "../../assets/Navbar.scss";
 
-const Home = ({ addToCart }) => {
+const Home = ({ addToCart,isLoggedIn,isSignedup }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -13,12 +12,6 @@ const Home = ({ addToCart }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [sortOrder, setSortOrder] = useState("");
   const [noResults, setNoResults] = useState(false);
-
-
-  const isLoggedIn = useSelector((state) => state.loginSignup.isLoggedIn);
-
-  const userData = JSON.parse(localStorage.getItem("userData"));
-  const isSignedup = userData !== null;
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products/categories")

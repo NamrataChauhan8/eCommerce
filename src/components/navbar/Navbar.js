@@ -1,13 +1,11 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+
 import "../../assets/Navbar.scss";
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, isSignedup }) => {
   const navigate = useNavigate();
   const location = useLocation();
-
-  const userData = JSON.parse(localStorage.getItem("userData"));
-  const isLoggedIn = userData !== null;
 
   const handleLogout = () => {
     localStorage.clear();
@@ -25,7 +23,7 @@ const Navbar = () => {
       <div className="container-fluid d-flex justify-content-between align-items-center">
         <span className="navbar-brand">eCommerce</span>
         <form className="d-flex">
-          {isLoggedIn && (
+          {isSignedup && isLoggedIn && (
             <>
               {showHomeButton && (
                 <button
@@ -49,7 +47,6 @@ const Navbar = () => {
               >
                 Logout
               </button>
-              
             </>
           )}
         </form>

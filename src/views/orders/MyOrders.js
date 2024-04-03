@@ -1,11 +1,9 @@
 import React from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 
-const MyOrders = ({ cartItems, removeFromCart }) => {
+const MyOrders = ({ cartItems, removeFromCart,isLoggedIn,isSignedup }) => {
   const navigate = useNavigate();
 
-  const userData = JSON.parse(localStorage.getItem("userData"));
-  const isLoggedIn = userData !== null;
 
   const handleCheckOut = () => {
     navigate("/checkout");
@@ -13,15 +11,24 @@ const MyOrders = ({ cartItems, removeFromCart }) => {
 
   return (
     <div className="container mt-3">
-      {!isLoggedIn && (
+      {!isSignedup ? (
         <div>
           <h1>Please Sign up first</h1>
           <NavLink className="btn btn-primary" to="/">
             Sign Up
           </NavLink>
         </div>
+      ) : (
+        !isLoggedIn && (
+          <div>
+            <h1>Please Login first</h1>
+            <NavLink className="btn btn-primary" to="/login">
+              Login
+            </NavLink>
+          </div>
+        )
       )}
-      {isLoggedIn && (
+      {isSignedup && isLoggedIn && (
         <div>
           <h2>My Orders</h2>
           {cartItems.length === 0 ? (
