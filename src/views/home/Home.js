@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "../../assets/Navbar.scss";
 
 const Home = ({ addToCart }) => {
@@ -13,8 +14,11 @@ const Home = ({ addToCart }) => {
   const [sortOrder, setSortOrder] = useState("");
   const [noResults, setNoResults] = useState(false);
 
+
+  const isLoggedIn = useSelector((state) => state.loginSignup.isLoggedIn);
+
   const userData = JSON.parse(localStorage.getItem("userData"));
-  const isLoggedIn = userData !== null;
+  const isSignedup = userData !== null;
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products/categories")
@@ -89,14 +93,14 @@ const Home = ({ addToCart }) => {
   };
   const handleAddToCart = (product) => {
     addToCart(product);
-    alert("Item added to cart successfully")
+    alert("Item added to cart successfully");
   };
 
   return (
     <div className="container-fluid mt-3">
       <form className="d-flex">
         <div className="input-group">
-          {isLoggedIn && (
+          {isSignedup && isLoggedIn && (
             <input
               type="text"
               className="form-control"
@@ -105,7 +109,7 @@ const Home = ({ addToCart }) => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           )}
-          {isLoggedIn && (
+          {isSignedup && isLoggedIn && (
             <button
               className="btn btn-outline-primary"
               onClick={handleSearch}
@@ -116,10 +120,10 @@ const Home = ({ addToCart }) => {
           )}
         </div>
       </form>
-      {noResults && (
+      {noResults && isSignedup && isLoggedIn && (
         <p style={{ margin: "3px", color: "red" }}>No products available</p>
       )}
-      {isLoggedIn && (
+      {isSignedup && isLoggedIn && (
         <div className="mt-3">
           <button
             type="button"
@@ -146,7 +150,7 @@ const Home = ({ addToCart }) => {
           ))}
         </div>
       )}
-      {isLoggedIn && (
+      {isSignedup && isLoggedIn && (
         <div className="row justify-content-center mt-3">
           <div className="col mb-4 text-center">
             <h4 style={{ color: "teal" }}>
@@ -169,7 +173,7 @@ const Home = ({ addToCart }) => {
           </div>
         </div>
       )}
-      {isLoggedIn && (
+      {isSignedup && isLoggedIn && (
         <div className="row row-cols-1 row-cols-md-3 row-cols-lg-5 justify-content-center">
           {currentProducts.map((product) => (
             <div className="col mb-4" key={product.id}>
@@ -206,8 +210,8 @@ const Home = ({ addToCart }) => {
           ))}
         </div>
       )}
-      {!noResults && isLoggedIn && (
-        <div className="pagination justify-content-center m-5" >
+      {!noResults && isSignedup && isLoggedIn && (
+        <div className="pagination justify-content-center m-5">
           <button
             onClick={() => paginate(currentPage - 1)}
             disabled={currentPage === 1}
@@ -241,13 +245,22 @@ const Home = ({ addToCart }) => {
           </button>
         </div>
       )}
-      {!isLoggedIn && (
+      {!isSignedup ? (
         <div>
           <h1>Please Sign up first</h1>
           <NavLink className="btn btn-primary" to="/">
             Sign Up
           </NavLink>
         </div>
+      ) : (
+        !isLoggedIn && (
+          <div>
+            <h1>Please Login first</h1>
+            <NavLink className="btn btn-primary" to="/login">
+              Login
+            </NavLink>
+          </div>
+        )
       )}
     </div>
   );

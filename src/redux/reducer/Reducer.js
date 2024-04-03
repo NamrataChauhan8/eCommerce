@@ -9,6 +9,7 @@ import {
   
   const initialState = {
     loading: false,
+    isLoggedIn: false,
     user: null,
     error: '',
   };
@@ -26,6 +27,7 @@ import {
         return {
           ...state,
           loading: false,
+          isLoggedIn: true,
           user: action.payload,
           error: '',
         };
